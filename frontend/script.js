@@ -1,5 +1,50 @@
 const API_URL = "http://127.0.0.1:8000";
 
+let expenseChart = null;
+function renderChart(summaryData) {
+
+    const ctx =
+        document
+            .getElementById("expenseChart")
+            .getContext("2d");
+
+    if (expenseChart) {
+        expenseChart.destroy();
+    }
+
+    expenseChart = new Chart(ctx, {
+        type: "bar",
+
+        data: {
+            labels: [
+                "Income",
+                "Expenses"
+            ],
+
+            datasets: [
+                {
+                    label: "Amount",
+
+                    data: [
+                        summaryData.income,
+                        summaryData.expenses
+                    ]
+                }
+            ]
+        },
+
+        options: {
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
 async function loadSummary() {
     const response = await fetch(
         `${API_URL}/transactions/summary`
@@ -8,13 +53,15 @@ async function loadSummary() {
     const data = await response.json();
 
     document.getElementById("income").textContent =
-        data.income;
+        data.income.toFixed(2);
 
     document.getElementById("expenses").textContent =
-        data.expenses;
+        data.expenses.toFixed(2);
 
     document.getElementById("balance").textContent =
-        data.balance;
+        data.balance.toFixed(2);
+
+    renderChart(data);
 }
 
 async function loadTransactions() {

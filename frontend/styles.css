@@ -92,3 +92,14 @@ button:hover {
 .delete-btn {
     padding: 8px 12px;
 }
+
+.chart-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#expenseChart {
+    max-height: 400px;
+}
