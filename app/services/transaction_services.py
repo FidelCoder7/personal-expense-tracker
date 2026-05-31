@@ -78,3 +78,26 @@ def delete_transaction(
 
     return True
 
+def get_summary(db: Session):
+    transactions = db.query(Transaction).all()
+
+    income = 0
+    expenses = 0
+
+    for t in transactions:
+        if not t.amount or not t.transaction_type:
+            continue
+
+        if t.transaction_type.lower() == "income":
+            income += t.amount
+        elif t.transaction_type.lower() == "expense":
+            expenses += t.amount
+
+
+    return {
+        "income": income,
+        "expenses": expenses,
+        "balance": income - expenses
+    }
+
+

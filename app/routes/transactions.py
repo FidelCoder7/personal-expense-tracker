@@ -1,3 +1,4 @@
+from app.services.transaction_services import get_summary
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import HTTPException
@@ -113,4 +114,20 @@ def delete_existing_transaction(
     return {
         "message": "Transaction deleted successfully"
     }
+
+@router.get("transanctions/summary")
+def summary(db: Session = Depends(get_db)):
+    return get_summary(db)
+
+@router.get("/{transaction_id}")
+def get_single_transaction(transaction_id: int, db: Session = Depends(get_db)):
+    transaction = get_transaction_by_id(db, transaction_id)
+
+    if not transaction:
+        raise HTTPException(status_code=404, detail="Transaction not found")
+
+    return transaction
+
+
+
 
