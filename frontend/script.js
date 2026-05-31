@@ -31,7 +31,15 @@ function renderChart(summaryData) {
                     data: [
                         summaryData.income,
                         summaryData.expenses
-                    ]
+                    ],
+
+                    backgroundcolor: [
+                        "#16a34a",
+                        "#dc2626"
+
+                    
+                    ],
+                    borderwidth: 1
                 }
             ]
         },
@@ -56,13 +64,13 @@ async function loadSummary() {
     const data = await response.json();
 
     document.getElementById("income").textContent =
-        data.income.toFixed(2);
+        `KES ${data.income.toFixed(2)}`;
 
     document.getElementById("expenses").textContent =
-        data.expenses.toFixed(2);
+        `KES ${data.expenses.toFixed(2)}`;
 
     document.getElementById("balance").textContent =
-        data.balance.toFixed(2);
+        `KES ${data.balance.toFixed(2)}`;
 
     renderChart(data);
 }

@@ -1,3 +1,15 @@
+:root {
+    --primary: #2563eb;
+    --success: #16a34a;
+    --danger: #dc2626;
+
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+
+    --text: #1e293b;
+    --border: #e2e8f0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,14 +17,27 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
-    padding: 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    background-color: var(--bg);
+
+    color: var(--text);
+
+    padding: 30px;
+
+    max-width: 1400px;
+
+    margin: auto;
 }
 
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
 .summary-container {
@@ -23,10 +48,21 @@ header {
 
 .card {
     flex: 1;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+    background: var(--card-bg);
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.08);
+
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
 }
 
 .card h2 {
@@ -34,7 +70,7 @@ header {
 }
 
 .card p {
-    font-size: 24px;
+    font-size: 2rem
     font-weight: bold;
 }
 
@@ -42,6 +78,12 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: white;
+     border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.08);
 }
 
 th,
@@ -52,14 +94,16 @@ td {
 }
 
 th {
-    background-color: #f0f0f0;
+    background-color: #f1f5f9;
+    font-weight: 600;
 }
 
 .form-section {
     background: white;
-    padding: 20px;
+    padding: 25px;
     margin-bottom: 30px;
-    border-radius: 10px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 #transaction-form {
@@ -81,23 +125,36 @@ th {
 
 button {
     border: none;
-    border-radius: 6px;
-    padding: 10px 15px;
+
+    background: var(--primary);
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
     cursor: pointer;
+
+    transition: 0.2s;
+
+    margin-right: 5px;
 }
+
 
 button:hover {
     opacity: 0.9;
 }
 .delete-btn {
-    padding: 8px 12px;
+    background: var(--danger);
 }
 
 .chart-section {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 25px;
+    border-radius: 16px;
     margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 #expenseChart {
@@ -109,4 +166,41 @@ button {
 }
 #cancel-edit {
     display: none;
+}
+
+.income-card {
+    border-left: 6px solid var(--success);
+}
+
+.expense-card {
+    border-left: 6px solid var(--danger);
+}
+
+.balance-card {
+    border-left: 6px solid var(--primary);
+}
+
+input,
+select {
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    padding: 12px;
+}
+
+@media (max-width: 768px) {
+
+    .summary-container {
+        flex-direction: column;
+    }
+
+    #transaction-form {
+        flex-direction: column;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }
