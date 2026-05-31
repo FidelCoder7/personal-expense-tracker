@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from app.database.database import engine
 app = FastAPI(
     title="Expense Tracker API",
     description="Personal Expense Tracker Backend",
