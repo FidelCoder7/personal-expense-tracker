@@ -37,6 +37,48 @@
         <section>
 
             <h2>Transactions</h2>
+            
+            <section class="form-section">
+
+    <h2>Add Transaction</h2>
+
+    <form id="transaction-form">
+
+        <input
+            type="text"
+            id="title"
+            placeholder="Transaction Title"
+            required
+        >
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Amount"
+            step="0.01"
+            required
+        >
+
+        <input
+            type="text"
+            id="category"
+            placeholder="Category"
+            required
+        >
+
+        <select id="transaction_type" required>
+            <option value="">Select Type</option>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+        </select>
+
+        <button type="submit">
+            Add Transaction
+        </button>
+
+    </form>
+
+</section>
 
             <table>
 

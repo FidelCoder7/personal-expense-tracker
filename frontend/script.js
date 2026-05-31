@@ -57,5 +57,61 @@ async function initializeDashboard() {
     await loadTransactions();
 }
 
+
+
+async function createTransaction(event) {
+
+    event.preventDefault();
+
+    const transaction = {
+
+        title:
+            document.getElementById("title").value,
+
+        amount:
+            parseFloat(
+                document.getElementById("amount").value
+            ),
+
+        category:
+            document.getElementById("category").value,
+
+        transaction_type:
+            document.getElementById(
+                "transaction_type"
+            ).value
+    };
+
+    const response = await fetch(
+        `${API_URL}/transactions/`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+            body: JSON.stringify(transaction)
+        }
+    );
+
+    if (!response.ok) {
+        alert("Failed to create transaction");
+        return;
+    }
+
+    document.getElementById(
+        "transaction-form"
+    ).reset();
+
+    await loadSummary();
+    await loadTransactions();
+}
+document
+    .getElementById("transaction-form")
+    .addEventListener(
+        "submit",
+        createTransaction
+    );
+
 initializeDashboard();
 

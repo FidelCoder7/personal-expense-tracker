@@ -54,3 +54,27 @@ td {
 th {
     background-color: #f0f0f0;
 }
+
+.form-section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+#transaction-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#transaction-form input,
+#transaction-form select {
+    padding: 10px;
+    flex: 1;
+}
+
+#transaction-form button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
