@@ -78,3 +78,17 @@ th {
     padding: 10px 20px;
     cursor: pointer;
 }
+
+button {
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+.delete-btn {
+    padding: 8px 12px;
+}

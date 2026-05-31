@@ -45,6 +45,15 @@ async function loadTransactions() {
             <td>${transaction.category}</td>
             <td>${transaction.transaction_type}</td>
             <td>${transaction.date}</td>
+
+            <td>
+                 <button
+                   class="delete-btn"
+                   onclick="deleteTransaction(${transaction.id})"
+                 >
+                   Delete
+                 </button>
+            </td>
         `;
 
         tableBody.appendChild(row);
@@ -99,6 +108,7 @@ async function createTransaction(event) {
         return;
     }
 
+
     document.getElementById(
         "transaction-form"
     ).reset();
@@ -106,6 +116,33 @@ async function createTransaction(event) {
     await loadSummary();
     await loadTransactions();
 }
+
+    async function deleteTransaction(id) {
+
+    const confirmed = confirm(
+        "Delete this transaction?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const response = await fetch(
+        `${API_URL}/transactions/${id}`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    if (!response.ok) {
+        alert("Failed to delete transaction");
+        return;
+    }
+
+    await loadSummary();
+    await loadTransactions();
+}
+
 document
     .getElementById("transaction-form")
     .addEventListener(
