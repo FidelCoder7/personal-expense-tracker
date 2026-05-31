@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.database.database import Base
 from app.database.database import engine
+from app.schemas import TransactionCreate
 
 from app.models import Transaction
 app = FastAPI(
@@ -18,3 +19,7 @@ def root():
     return {
         "message": "Expense Tracker API is running"
     }
+
+@app.post("/test")
+def test_schema(transaction: TransactionCreate):
+    return transaction
