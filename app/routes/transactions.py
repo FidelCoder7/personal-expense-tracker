@@ -1,7 +1,7 @@
-from app.services.transaction_services import get_summary
 from fastapi import APIRouter
 from fastapi import Depends
 from fastapi import HTTPException
+from app.services.transaction_services import get_summary
 
 from sqlalchemy.orm import Session
 
@@ -49,10 +49,15 @@ def get_all_transactions(
 ):
     return get_transactions(db)
 
-@router.get(
-    "/{transaction_id}",
-    response_model=TransactionResponse
-)
+@router.get("/summary")
+def summary(db: Session = Depends(get_db)):
+    return get_summary(db)
+
+@router.get("/{transaction_id}")
+def summary(db: Session = Depends(get_db)):
+    return get_summary(db)
+
+
 def get_single_transaction(
     transaction_id: int,
     db: Session = Depends(get_db)
@@ -115,18 +120,6 @@ def delete_existing_transaction(
         "message": "Transaction deleted successfully"
     }
 
-@router.get("transanctions/summary")
-def summary(db: Session = Depends(get_db)):
-    return get_summary(db)
-
-@router.get("/{transaction_id}")
-def get_single_transaction(transaction_id: int, db: Session = Depends(get_db)):
-    transaction = get_transaction_by_id(db, transaction_id)
-
-    if not transaction:
-        raise HTTPException(status_code=404, detail="Transaction not found")
-
-    return transaction
 
 
 

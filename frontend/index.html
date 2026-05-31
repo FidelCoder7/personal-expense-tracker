@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Dashboard</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Personal Expense Tracker</h1>
+    </header>
+
+    <main>
+
+        <section class="summary-container">
+
+            <div class="card">
+                <h2>Total Income</h2>
+                <p id="income">0</p>
+            </div>
+
+            <div class="card">
+                <h2>Total Expenses</h2>
+                <p id="expenses">0</p>
+            </div>
+
+            <div class="card">
+                <h2>Balance</h2>
+                <p id="balance">0</p>
+            </div>
+
+        </section>
+
+        <section>
+
+            <h2>Transactions</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody id="transactions-body">
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
