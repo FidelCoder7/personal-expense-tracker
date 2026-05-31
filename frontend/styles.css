@@ -103,3 +103,10 @@ button:hover {
 #expenseChart {
     max-height: 400px;
 }
+
+button {
+    margin-right: 5px;
+}
+#cancel-edit {
+    display: none;
+}

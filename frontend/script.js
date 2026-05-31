@@ -1,6 +1,9 @@
 const API_URL = "http://127.0.0.1:8000";
 
 let expenseChart = null;
+
+let editingTransactionId = null;
+
 function renderChart(summaryData) {
 
     const ctx =
@@ -94,6 +97,12 @@ async function loadTransactions() {
             <td>${transaction.date}</td>
 
             <td>
+                <button
+                    onclick="editTransaction(${transaction.id})"
+                >
+                    Edit
+                 </button>
+
                  <button
                    class="delete-btn"
                    onclick="deleteTransaction(${transaction.id})"
@@ -138,33 +147,60 @@ async function createTransaction(event) {
             ).value
     };
 
+     let url =
+        `${API_URL}/transactions/`;
+
+    let method = "POST";
+
+    if (editingTransactionId) {
+
+        url =
+            `${API_URL}/transactions/${editingTransactionId}`;
+
+        method = "PUT";
+    }
+
     const response = await fetch(
-        `${API_URL}/transactions/`,
+        url,
         {
-            method: "POST",
+            method: method,
+
             headers: {
                 "Content-Type":
                     "application/json"
             },
-            body: JSON.stringify(transaction)
+
+            body:
+                JSON.stringify(transaction)
         }
     );
 
     if (!response.ok) {
-        alert("Failed to create transaction");
+        alert("Operation failed");
         return;
     }
 
-
+    document
+        .getElementById(
+            "transaction-form"
+        )
+        .reset();
+        
     document.getElementById(
-        "transaction-form"
-    ).reset();
+    "cancel-edit"
+).style.display = "none";
+
+    editingTransactionId = null;
+
+    document.querySelector(
+        "#transaction-form button"
+    ).textContent = "Add Transaction";
 
     await loadSummary();
     await loadTransactions();
 }
 
-    async function deleteTransaction(id) {
+async function deleteTransaction(id) {
 
     const confirmed = confirm(
         "Delete this transaction?"
@@ -190,11 +226,69 @@ async function createTransaction(event) {
     await loadTransactions();
 }
 
+async function editTransaction(id) {
+
+    const response = await fetch(
+        `${API_URL}/transactions/${id}`
+    );
+
+    const transaction =
+        await response.json();
+
+    document.getElementById("title").value =
+        transaction.title;
+
+    document.getElementById("amount").value =
+        transaction.amount;
+
+    document.getElementById("category").value =
+        transaction.category;
+
+    document.getElementById("transaction_type").value =
+        transaction.transaction_type;
+    
+    document.getElementById(
+    "cancel-edit"
+    ).style.display = "inline-block";
+
+    editingTransactionId = id;
+
+    document.querySelector(
+        "#transaction-form button"
+    ).textContent = "Update Transaction";
+}
+
+function cancelEdit() {
+
+    editingTransactionId = null;
+
+    document
+        .getElementById(
+            "transaction-form"
+        )
+        .reset();
+
+    document.querySelector(
+        "#transaction-form button"
+    ).textContent = "Add Transaction";
+
+    document.getElementById(
+        "cancel-edit"
+    ).style.display = "none";
+}
+
 document
     .getElementById("transaction-form")
     .addEventListener(
         "submit",
         createTransaction
+    );
+
+document
+    .getElementById("cancel-edit")
+    .addEventListener(
+        "click",
+        cancelEdit
     );
 
 initializeDashboard();
