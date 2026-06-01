@@ -54,9 +54,6 @@ def summary(db: Session = Depends(get_db)):
     return get_summary(db)
 
 @router.get("/{transaction_id}")
-def summary(db: Session = Depends(get_db)):
-    return get_summary(db)
-
 
 def get_single_transaction(
     transaction_id: int,
