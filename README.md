@@ -1,6 +1,6 @@
 # Personal Expense Tracker API + Dashboard
 
-![CI](https://github.com/FidelCoder7/expense-tracker/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/FidelCoder7/personal-expense-tracker/actions/workflows/ci.yml/badge.svg)
 
 A full-stack expense tracking application built with FastAPI, SQLAlchemy, SQLite, HTML, CSS, and JavaScript.
 
