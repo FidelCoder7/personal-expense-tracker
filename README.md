@@ -110,8 +110,8 @@ expense-tracker/
 ## Installation
 
 ### Clone Repository
-
-git clone <your-repository-url>
+```bash
+git clone https://github.com/FidelCoder7/personal-expense-tracker.git
 
 cd expense-tracker
 
